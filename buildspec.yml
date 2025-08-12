@@ -1,17 +1,6 @@
 version: 0.2
 
 phases:
-  pre_build:
-    commands:
-      - echo Logging in to Amazon ECR...
-      - aws sts get-caller-identity
-      - aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin 780714934193.dkr.ecr.eu-west-1.amazonaws.com
-  build:
-    commands:
-      - echo Building the Docker image...
-      - docker build -t my-html-app .
-      - docker tag my-html-app:latest 780714934193.dkr.ecr.eu-west-1.amazonaws.com/my-html-app:latest
-      - docker push 780714934193.dkr.ecr.eu-west-1.amazonaws.com/my-html-app:latest
   post_build:
     commands:
       - echo Applying Kubernetes deployment...
