@@ -12,7 +12,7 @@ phases:
       - aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin 780714934193.dkr.ecr.eu-west-1.amazonaws.com
       - echo "Setting up kubeconfig..."
       - mkdir -p ~/.kube
-      - aws eks update-kubeconfig --name my-eks-cluster --region eu-west-1 --kubeconfig ~/.kube/config
+      - aws eks update-kubeconfig --name my-eks-cluster --region eu-west-1 --role-arn arn:aws:iam::780714934193:role/service-role/codebuild-app1-service-role --kubeconfig ~/.kube/config
       - export KUBECONFIG=~/.kube/config
   build:
     commands:
